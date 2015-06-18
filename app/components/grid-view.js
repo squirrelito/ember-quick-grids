@@ -1,0 +1,1 @@
+export { default } from 'ember-quick-grids/components/grid-view';

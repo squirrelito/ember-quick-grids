@@ -1,0 +1,24 @@
+{{#if view.total}}
+<div class="row">
+    <div class="col-sm-6">
+        <div class="dataTables_info" role="status" aria-live="polite">
+            Showing {{view.from}} to {{view.to}} of {{view.total}} entries
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        {{#if view.total}}
+        <div class="dataTables_paginate paging_simple_numbers">
+            <ul class="pagination">
+                {{#each page in view.pages}}
+                    <li tabindex="0"
+                        {{bind-attr class=":paginate_button page.disabled:disabled page.active:active page.className"}}>
+                        <a href="javascript:;" {{action "paginate" page.number}}>{{page.label}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+    </div>
+</div>
+{{/if}}
