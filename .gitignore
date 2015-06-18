@@ -10,7 +10,7 @@
 
 # misc
 /.sass-cache
-/.idea/*
+/.idea
 /connect.lock
 /coverage/*
 /libpeerconnection.log
