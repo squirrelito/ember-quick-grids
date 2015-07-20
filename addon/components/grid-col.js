@@ -3,21 +3,17 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     model: null,
     column: null,
-    t: false,
-    value: '',
-    willInsertElement: function() {
-        var col = this;
-
-        var valObj = col.column.value(col.model);
-        if (valObj.template) {
-            col.set('value', valObj);
-            col.set('t', valObj.template);
+    t: Ember.computed('column', 'model', function() {
+        var valObj = this.column.value(this.model);
+        if (valObj && valObj.template) {
+            return valObj.template;
         } else {
-            col.set('value', valObj);
+            return '';
         }
-
-        col._super();
-    },
+    }),
+    value: Ember.computed('column', 'model', function() {
+        return this.column.value(this.model);
+    }),
     actions: {
         action: function (action, param1, param2, param3) {
             this.get('value')[action](param1, param2, param3);
