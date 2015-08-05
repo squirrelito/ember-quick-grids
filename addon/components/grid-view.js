@@ -3,12 +3,12 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   id: false,
   localStorage: false,
-  tableId: Ember.computed('id', function() { // FINE
+  tableId: Ember.computed('id', function() {
     return 'grid-view-' + this.get('id');
   }),
 
   columns: false,
-  columnsStatic: Ember.computed('contents', { // FINE
+  columnsStatic: Ember.computed('contents', {
     get: function() {
       return this.get('columns');
     }
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
 
   columnsVisibility: [],
   allVisible: false,
-  columnVisibilityChanged: function() { // FINE
+  columnVisibilityChanged: function() {
     var component = this.get('parentView');
     var allVisible = true;
     component.get('columnsVisibility').forEach((item) => {
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     component.set('allVisible', allVisible);
     return true;
   },
-  allVisibilityChanged: function(c) { // FINE
+  allVisibilityChanged: function(c) {
     var component = this.get('parentView');
     component.get('columnsVisibility').forEach((item) => {
       Ember.set(item, 'visible', c.target.checked);
@@ -36,87 +36,72 @@ export default Ember.Component.extend({
   },
 
   contents: false,
-  pagination: Ember.computed('contents.total', 'contents.per_page', 'contents.current_page', { // FINE
+  pagination: Ember.computed('contents.total', 'contents.per_page', 'contents.current_page', {
     get: function() {
       return this.get('contents.meta');
     }
   }),
 
-  willInsertElement: function() { // FINE
+  willInsertElement: function() {
+    this.setupSessionState();
     Ember.run.later(this, () => {
       this.setupColumnProperties();
-    });
-
+    }, 500);
     this._super();
   },
-  didInsertElement: function() { // FINE
+  didInsertElement: function() {
     Ember.run.later(this, () => {
       this.setupResizables();
       this.setupSorttables();
       this.setupDropdowns();
-    });
-
+    }, 500);
     this._super();
   },
 
-  getWidthInPercent: function (el) { // FINE
+  getWidthInPercent: function (el) {
     return Math.round(
         100 *
         parseFloat(this.$(el).css('width')) /
         parseFloat(this.$(el).parent().css('width'))
-      ) + '%';
+      );
   },
-  setupSessionState: function() {
-    var grid = this;
-
-    var storedColumns = false;
-    if (grid.get('localStorage')) {
-      grid.get('localStorage').set('grid-' + grid.get('id'), false);
-      storedColumns = grid.get('localStorage').get('grid-' + grid.get('id'));
-    }
-
-    if (storedColumns) {
-      storedColumns.forEach(function(item, index) {
-        grid.get('columns').forEach(function(itemOriginal) {
-          if (itemOriginal.id === item.id) {
-            storedColumns[index].value = itemOriginal.value;
-          }
-        });
-      });
-
-      grid.set('columns', storedColumns);
-    } else {
-      grid.get('columns').forEach(function(itemOriginal) {
-        if (itemOriginal.sorted) {
-          Ember.set(itemOriginal, 'sortAsc', itemOriginal.sort.substr(0, 1) !== '-');
-          Ember.set(itemOriginal, 'sortDesc', itemOriginal.sort.substr(0, 1) === '-');
-        } else {
-          Ember.set(itemOriginal, 'sortAsc', false);
-          Ember.set(itemOriginal, 'sortDesc', false);
-        }
-      });
-    }
-  },
-  setupDropdowns: function() { // FINE
+  setupDropdowns: function() {
     this.$('#' + this.get('tableId') + ' th .dropdown-toggle').dropdown();
     this.$('#' + this.get('tableId') + ' th .dropdown-menu.form');
   },
-  setupResizables: function() { // FINE
+  setupResizables: function() {
     if (this.$('#' + this.get('tableId')).data('resizableColumns')) {
       this.$('#' + this.get('tableId')).resizableColumns('destroy');
     }
 
     this.$('#' + this.get('tableId')).resizableColumns({
+      store: {
+        set: (/*columnId, width*/) => {
+          return true;
+        },
+        get: (columnId) => {
+          columnId = 'grid-view-' + columnId;
+          columnId = columnId.replace(this.get('tableId') + '-', '');
+          var width = 10;
+          var columns = this.get('columns');
+          columns.forEach((item) => {
+            if (columnId === item.id) {
+              width = item.width;
+            }
+          });
+          return width;
+        }
+      },
       stop: (/* event, config */) => {
         var columns = this.get('columns');
         columns.forEach((item) => {
-          Ember.set(item, 'width', 'width: ' + this.getWidthInPercent(this.$('#' + this.get('tableId') + ' th[data-resizable-column-id="' + item.id + '"]')));
+          Ember.set(item, 'width', this.getWidthInPercent(this.$('#' + this.get('tableId') + ' th[data-resizable-column-id="' + item.id + '"]')));
         });
         this.persistColumns(columns);
       }
     });
   },
-  setupSorttables: function() { // FINE
+  setupSorttables: function() {
     if (this.$('#' + this.get('tableId')).data('extend-sorttable')) {
       this.$('#' + this.get('tableId')).sorttable('destroy');
     }
@@ -152,7 +137,7 @@ export default Ember.Component.extend({
           }
         });
 
-        Ember.run.later(this, () => { // otherwise resizableColumns are buggy
+        Ember.run.later(this, () => {
           this.set('columns', columnsFinal);
           this.setupColumnProperties();
           this.persistColumns(columnsFinal);
@@ -161,7 +146,7 @@ export default Ember.Component.extend({
       }
     });
   },
-  setupColumnProperties: function() { // FINE
+  setupColumnProperties: function() {
     var columnsVisibility = [];
     var allVisible = true;
 
@@ -181,15 +166,33 @@ export default Ember.Component.extend({
     this.set('columnsVisibility', columnsVisibility);
     this.set('allVisible', allVisible);
   },
-  persistColumns: function(columns) { // FINE
+  persistColumns: function(columns) {
     this.setupColumnProperties();
     if (this.get('localStorage')) {
       this.get('localStorage').set('grid-' + this.get('id'), columns);
     }
   },
+  setupSessionState: function() {
+    var storedColumns = false;
+    if (this.get('localStorage')) {
+      //this.get('localStorage').set('grid-' + this.get('id'), false);
+      storedColumns = this.get('localStorage').get('grid-' + this.get('id'));
+    }
+
+    if (storedColumns) {
+      storedColumns.forEach((item, index) => {
+        this.get('columns').forEach(function(itemOriginal) {
+          if (itemOriginal.id === item.id) {
+            storedColumns[index].value = itemOriginal.value;
+          }
+        });
+      });
+      this.set('columns', storedColumns);
+    }
+  },
 
   actions: {
-    applyTableOptions: function() { // FINE
+    applyTableOptions: function() {
       var noColumnVisible = true;
       this.get('columnsVisibility').forEach((item) => {
         if (item.visible) {
@@ -219,7 +222,7 @@ export default Ember.Component.extend({
 
       this.$('#' + this.get('tableId') + ' th .dropdown-toggle').parent().removeClass('open');
     },
-    cancelTableOptions: function() { // FINE
+    cancelTableOptions: function() {
       this.setupColumnProperties();
       this.$('#' + this.get('tableId') + ' th .dropdown-toggle').parent().removeClass('open');
     },
@@ -227,28 +230,27 @@ export default Ember.Component.extend({
       this.sendAction('paginate', page);
     },
     sort: function(col) {
+      var direction;
       var columns = this.get('columns');
       columns.forEach(function(item) {
         if (item.id === col.id) {
-          Ember.set(item, 'sorted', true);
-          if (item.sort.substr(0, 1) === '-') {
+          if (item.sortDesc) {
+            direction = 'asc';
             Ember.set(item, 'sortAsc', true);
             Ember.set(item, 'sortDesc', false);
-            Ember.set(item, 'sort', item.sort.replace('-', ''));
           } else {
+            direction = 'desc';
             Ember.set(item, 'sortAsc', false);
             Ember.set(item, 'sortDesc', true);
-            Ember.set(item, 'sort', '-' + item.sort);
           }
         } else {
-          Ember.set(item, 'sorted', false);
           Ember.set(item, 'sortAsc', false);
           Ember.set(item, 'sortDesc', false);
         }
       });
       this.persistColumns(columns);
 
-      this.sendAction('sort');
+      this.sendAction('sort', col.sort, direction);
     }
   }
 });
