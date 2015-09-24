@@ -17,11 +17,11 @@
                                     </a>
                                     <form class="dropdown-menu table-options" aria-labelledby="dropdownMenu1">
                                         <div class="col-md-12">
-                                            <label>{{input type="checkbox" name="all" checked=allVisible action=allVisibilityChanged on="change"}} Check/Uncheck All</label>
+                                            <label>{{input type="checkbox" name="all" checked=allVisible change=allVisibilityChanged}} Check/Uncheck All</label>
                                         </div>
                                         {{#each columnsVisibility as |cOption|}}
                                             <div class="col-md-12">
-                                                <label>{{input type="checkbox" name=cOption.name checked=cOption.visible action=columnVisibilityChanged on="change" }} {{cOption.name}}</label>
+                                                <label>{{input type="checkbox" name=cOption.name checked=cOption.visible change=columnVisibilityChanged}} {{cOption.name}}</label>
                                             </div>
                                         {{/each}}
                                         <div class="col-md-12">
