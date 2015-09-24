@@ -1,6 +1,7 @@
 {
   "name": "ember-quick-grids",
-  "version": "0.0.1",
+  "version": "0.0.3",
+  "repository": "https://github.com/squirrelito/ember-quick-grids.git",
   "description": "Ember quick grids addon.",
   "directories": {
     "doc": "doc",
@@ -11,35 +12,34 @@
     "build": "ember build",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/squirrelito/ember-quick-grids.git",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Georgi Budinov",
   "license": "MIT",
   "devDependencies": {
-    "broccoli-asset-rev": "^2.0.2",
-    "ember-cli": "1.13.1",
-    "ember-cli-app-version": "0.3.3",
-    "ember-cli-content-security-policy": "0.4.0",
-    "ember-cli-dependency-checker": "^1.0.0",
-    "ember-cli-htmlbars": "0.7.6",
-    "ember-cli-ic-ajax": "0.1.1",
-    "ember-cli-inject-live-reload": "^1.3.0",
-    "ember-cli-mirage": "0.1.5",
-    "ember-cli-qunit": "0.3.13",
-    "ember-cli-uglify": "^1.0.1",
-    "ember-data": "v1.0.0-beta.19.2",
-    "ember-disable-prototype-extensions": "^1.0.0",
-    "ember-disable-proxy-controllers": "^1.0.0",
-    "ember-export-application-global": "^1.0.2",
-    "ember-try": "0.0.6"
+    "broccoli-asset-rev": "2.1.x",
+    "ember-cli": "1.13.x",
+    "ember-cli-app-version": "1.0.x",
+    "ember-cli-content-security-policy": "0.4.x",
+    "ember-cli-dependency-checker": "1.0.x",
+    "ember-cli-ic-ajax": "0.2.x",
+    "ember-cli-inject-live-reload": "1.3.x",
+    "ember-cli-mirage": "0.1.x",
+    "ember-cli-qunit": "1.0.x",
+    "ember-cli-uglify": "1.2.x",
+    "ember-data": "2.x",
+    "ember-disable-proxy-controllers": "0.7.x",
+    "ember-export-application-global": "1.0.x",
+    "ember-disable-prototype-extensions": "1.0.x",
+    "ember-try": "0.0.x"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.0.0"
+    "ember-cli-babel": "5.1.x",
+    "ember-cli-htmlbars": "1.0.x"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

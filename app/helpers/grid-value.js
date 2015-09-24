@@ -1,5 +1,5 @@
 import Ember from 'ember';
 
-export default Ember.Handlebars.makeBoundHelper( function(col, con) {
+export default Ember.Helper.helper( function(col, con) {
     return col.value(con);
 });
