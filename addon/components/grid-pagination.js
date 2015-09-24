@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   maxButtons: 4,
   currentPage: 1,
   from: Ember.computed('model.per_page', 'model.current_page', {
-    get: function() {
+    get: function () {
       if (this.get('model.current_page') > 0) {
         return (this.get('model.current_page') - 1) * this.get('model.per_page') + 1;
       }
@@ -13,7 +13,7 @@ export default Ember.Component.extend({
     }
   }),
   to: Ember.computed('model.total', 'model.per_page', 'model.current_page', {
-    get: function() {
+    get: function () {
       if (this.get('model.current_page') < this.get('model.total') - this.get('model.per_page')) {
         return this.get('model.current_page') * this.get('model.per_page');
       }
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     }
   }),
   pages: Ember.computed('model.total', 'model.per_page', 'model.current_page', {
-    get: function() {
+    get: function () {
 
       var total = this.get('model.total');
       var perPage = this.get('model.per_page');
