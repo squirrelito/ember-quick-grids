@@ -10,7 +10,8 @@ module.exports = {
 
     app.import(app.bowerDirectory + '/jquery-ui/jquery-ui.min.js');
     app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.min.js');
-    app.import(app.bowerDirectory + '/jquery.sorttable/index.js');
+    //app.import(app.bowerDirectory + '/jquery.sorttable/index.js');
+    app.import('vendor/sorttable/index.js');
     app.import(app.bowerDirectory + '/jquery-resizable-columns/dist/jquery.resizableColumns.min.js');
 
     app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.min.css');
