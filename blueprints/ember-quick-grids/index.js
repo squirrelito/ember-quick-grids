@@ -1,5 +1,6 @@
 module.exports = {
   description: '',
+  normalizeEntityName: function () {},
   afterInstall: function () {
     return this.addBowerPackagesToProject([
       {'name':'ember', 'target': '2.x'},
