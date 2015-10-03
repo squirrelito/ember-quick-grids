@@ -9,8 +9,7 @@
     "ember-resolver": "0.1.x",
     "jquery": "2.x",
     "jquery-ui": "1.11.x",
-    "jquery-resizable-columns": "0.x",
-    "jquery.sorttable": "https://raw.githubusercontent.com/dbrink/sorttable/master/jquery.sorttable.js"
+    "jquery-resizable-columns": "0.x"
   },
   "devDependencies": {
     "ember-cli-shims": "0.0.x",

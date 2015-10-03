@@ -7,7 +7,11 @@ This addon helps in generating dynamic grids that can:
 * allows data sorting action
 * allows pagination action
 
-Designed to work with Ember 2.0 and ember-data 2.0
+## Dependencies
+* Ember 2.x
+* Ember-data 2.x
+* jQuery 2.x
+* jQuery UI 1.11.x
 
 ## Installation
 
