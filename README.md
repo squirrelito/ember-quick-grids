@@ -1,25 +1,25 @@
-# Ember-quick-grids
+# Ember addon for generating customizable grids
 
-This README outlines the details of collaborating on this Ember addon.
+This addon helps in generating dynamic grids that can:
+* resize the columns
+* reorder the columns
+* show/hide the columns
+* allows data sorting action
+* allows pagination action
+
+Designed to work with Ember 2.0 and ember-data 2.0
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+* `ember init hostApp`
+* `cd hostApp`
+* `ember install ember-quick-grids`
 
 ## Running
 
 * `ember server`
 * Visit your app at http://localhost:4200.
 
-## Running Tests
+## Demo
 
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+[http://squirrelito.github.io/ember-quick-grids/](http://squirrelito.github.io/ember-quick-grids/)
