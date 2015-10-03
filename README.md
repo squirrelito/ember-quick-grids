@@ -1,4 +1,4 @@
-# Ember addon for generating customizable grids
+# Ember - customizable grids builder
 
 This addon helps in generating dynamic grids that can:
 * resize the columns
