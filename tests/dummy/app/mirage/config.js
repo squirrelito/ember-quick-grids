@@ -1,7 +1,7 @@
 import config from '../config/environment';
 
 export default function() {
-  this.get((config.environment === 'production' ? '/ember-quick-grids' : '') + '/api/users', function(param, request) {
+  this.get(config.baseURL + 'api/users', function(param, request) {
     var result = {
       data: [
         {type: 'user', id: 1, attributes: {username: 'zelda1', email: 'zelda@yahoo.com', name: 'Zelda', status: 'Active'}},
