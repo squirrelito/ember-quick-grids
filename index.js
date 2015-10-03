@@ -12,7 +12,6 @@ module.exports = {
 
     target.import(target.bowerDirectory + '/jquery-ui/jquery-ui.min.js');
     target.import(target.bowerDirectory + '/bootstrap/dist/js/bootstrap.min.js');
-    //target.import(target.bowerDirectory + '/jquery.sorttable/index.js');
     target.import('vendor/sorttable/index.js');
     target.import(target.bowerDirectory + '/jquery-resizable-columns/dist/jquery.resizableColumns.min.js');
 
