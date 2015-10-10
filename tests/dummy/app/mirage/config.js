@@ -1,8 +1,8 @@
 import config from '../config/environment';
 
 export default function() {
-  console.info(config.baseURL);
-  this.get(config.baseURL + 'api/users', function(param, request) {
+  this.namespace = config.baseURL + 'api';
+  this.get('/users', function(param, request) {
     var result = {
       data: [
         {type: 'user', id: 1, attributes: {username: 'zelda1', email: 'zelda@yahoo.com', name: 'Zelda', status: 'Active'}},

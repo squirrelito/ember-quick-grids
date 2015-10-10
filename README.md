@@ -26,4 +26,4 @@ This addon helps in generating dynamic grids that can:
 
 ## Demo
 
-[http://squirrelito.github.io/ember-quick-grids/](http://squirrelito.github.io/ember-quick-grids/){:target="_blank"}
+[http://squirrelito.github.io/ember-quick-grids/](http://squirrelito.github.io/ember-quick-grids/)
