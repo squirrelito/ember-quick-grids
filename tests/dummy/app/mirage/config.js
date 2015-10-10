@@ -1,7 +1,7 @@
 import config from '../config/environment';
 
 export default function() {
-  condole.info(config.baseURL);
+  console.info(config.baseURL);
   this.get(config.baseURL + 'api/users', function(param, request) {
     var result = {
       data: [
